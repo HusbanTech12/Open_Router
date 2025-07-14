@@ -2,10 +2,10 @@ import os
 from dotenv import load_dotenv
 from agents import Agent,Runner , AsyncOpenAI ,RunConfig, OpenAIChatCompletionsModel
 
-    # Load .env file and get API Key
+# Load .env file and get API Key / This will load variables from .env file
+
 load_dotenv()
 openrouter_api_key = os.getenv("OPENROUTER_API_KEY")
-
 
 # Check Key Exists
 
@@ -14,7 +14,7 @@ if not openrouter_api_key:
 
 
 # ✅ Important: Tell OpenAI client to use that key
-os.environ["OPENAI_API_KEY"] = openrouter_api_key  # <- required by `openai-python`
+# os.environ["OPENAI_API_KEY"] = openrouter_api_key  # <- required by `openai-python`
         
 # Set Openrouter Client
 
@@ -42,13 +42,13 @@ config = RunConfig(
 # Define Agent 
 
 agent = Agent(
-        name = 'Writer Agent',
+        name = 'Writer gent',
         instructions= 'You are a Writer Agent.Write Story , Essay , Poems and etc'  
     )
 
 # Input and Run Agent 
 
-run = Runner.run_sync(
+response = Runner.run_sync(
         agent,
         input = 'Write an essay on Problems of Karachi.',
         run_config= config
@@ -57,4 +57,4 @@ run = Runner.run_sync(
 
 # Output
 
-print(run.final_output)
+print(response.final_output)
